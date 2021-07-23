@@ -1,23 +1,127 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import heart from "./Images/heart.png";
+import remove from "./Images/delete.png";
+import CardView from "./Components/CardView";
 
 function App() {
+  const Api_key = "8691eb734123a777487351b5d9f298d2";
+  const [country, setCountry] = useState("");
+  const [city, setCity] = useState("");
+  const [data, setData] = useState([]);
+  const [storecities, setStorecities] = useState([]);
+  const [cities, setCities] = useState([]);
+
+  const submit = async () => {
+    const weatherReport = await fetch(
+      `https://api.openweathermap.org/data/2.5/weather?q=${city},${country}&appid=${Api_key}`
+    );
+    const response = await weatherReport.json();
+    setData(response);
+  };
+
+  const favourite = () => {
+    if (
+      cities.filter((item) => item[0] === data.name).length === 0 ||
+      cities.length === 0
+    ) {
+      setCities([...cities, [data.name, data.sys.country]]);
+    }
+  };
+
+  useEffect(() => {
+    localStorage.setItem("queryies", JSON.stringify(cities));
+    const data = localStorage.getItem("queryies");
+    setStorecities(JSON.parse(data));
+  }, [cities])
+
+  const Checkfavourite = async (ci, con) => {
+    const weatherReport = await fetch(
+      `https://api.openweathermap.org/data/2.5/weather?q=${ci},${con}&appid=${Api_key}`
+    );
+    const response = await weatherReport.json();
+    setData(response);
+  };
+
+  const removefav = (cty, cntry) => {
+    const item = storecities.filter((item) => item[0] !== cty)
+    setCities(item);
+  }
+
+  // console.log("Data", data.weather[0].main);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+    <div
+      className={data.length === 0 ? "header" : `${data.weather[0].main}`}
+      // className={
+      //   data.cod === "404" || data.length === 0
+      //     ? "header"
+      //     : data.main > "200"
+      //     ? "header_hot"
+      //     : "header_cold"
+      // }
+    >
+      <h1 style={{ color: "white" }}>Weather Checker</h1>
+      <div className='form'>
+        <input
+          type='search'
+          defaultValue=''
+          placeholder='Search City'
+          autoComplete='small'
+          onChange={(e) => {
+            setCity(e.target.value);
+          }}
+        />
+        <input
+          type='search'
+          defaultValue=''
+          placeholder='Search Country'
+          autoComplete='small'
+          onChange={(e) => {
+            setCountry(e.target.value);
+          }}
+        />
+
+        <button
+          type='submit'
+          onClick={() => submit()}
+          className='btn'
+          type='submit'
         >
-          Learn React
-        </a>
-      </header>
+          Go
+        </button>
+      </div>
+
+      <CardView wreport={data} favourite={favourite} />
+
+      <div className='favourite'>
+        {storecities.map((query, index) => (
+          <div key={index} className='fav_card_holder'>
+            <div className='fav_card'>
+              <div className='fav_icon'>
+                <img src={heart} height='20px' width='20px'></img>
+                <img
+                  onClick={() => {
+                    removefav(query[0], query[1]);
+                  }}
+                  src={remove}
+                  height='20px'
+                  width='20px'
+                ></img>
+              </div>
+              <div
+                className='cityinfo'
+                onClick={() => {
+                  Checkfavourite(query[0], query[1]);
+                }}
+              >
+                <h3 className='card'>{query[0] + ", " + query[1]}</h3>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
