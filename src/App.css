@@ -53,6 +53,28 @@ body {
   background-attachment: fixed;
 }
 
+.Sand {
+  min-height:100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-image: url(./Images/sand.jpg);
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+.Fog {
+  min-height:100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-image: url(./Images/fogg.jpg);
+  background-size: cover;
+  background-attachment: fixed;
+}
+
 .Clouds {
   min-height:100vh;
   display: flex;
@@ -92,6 +114,27 @@ body {
   align-items: center;
   flex-direction: column;
   background-image: url(./Images/Tornado.jpg);
+  background-size: cover;
+  background-attachment: fixed;
+}
+.Ash {
+  min-height:100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-image: url(./Images/ash.jpg);
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+.Dust {
+  min-height:100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-image: url(./Images/dust.jpg);
   background-size: cover;
   background-attachment: fixed;
 }
