@@ -101,13 +101,6 @@ function App() {
           ? "container"
           : `${data.weather[0].main}`
       }
-      // className={
-      //   data.cod === "404" || data.length === 0
-      //     ? "header"
-      //     : data.main > "200"
-      //     ? "header_hot"
-      //     : "header_cold"
-      // }
     >
       <h1 style={{ color: "white" }}>Weather Checker</h1>
 
@@ -136,7 +129,7 @@ function App() {
               Sunset:{" "}
               {new Date(cldata.sunset * 1000).toLocaleTimeString("en-IN")}
             </h5>
-            <h6>Description: {cldata.weather[0].main}</h6>
+            <h5>Description: {cldata.weather[0].main}</h5>
           </div>
         </div>
       )}

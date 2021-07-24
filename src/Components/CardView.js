@@ -46,13 +46,14 @@ const CardView = ({ wreport, favourite }) => {
           <div className='glass'>
             <div className='card'>
               <div>
-                {/* <h2>City</h2>
-                <h3>39°C</h3>
-                <p>10-2-2021</p>
-                <p>Sunrise:5:10AM</p>
-                <p>Description: </p>
-                <p>Humidity: %</p> */}
-                {/* Place or Country name does not exist. */}
+                <h3
+                  style={{
+                    textAlign: "center",
+                    margin: "25%",
+                  }}
+                >
+                  Check your internet connection or wrong city/country searched.
+                </h3>
               </div>
               <div style={{ padding: "30px 5px" }}>
                 <img className='heart' src={heart} height='20px' />
@@ -72,9 +73,11 @@ const CardView = ({ wreport, favourite }) => {
                 <p>{CurrentDate(new Date())}</p>
                 <p>
                   Sunrise:{" "}
-                  {new Date(wreport.sys.sunrise * 1000).toLocaleTimeString(
-                    "en-IN"
-                  )}
+                  {new Date(wreport.sys.sunrise * 1000).toLocaleTimeString()}
+                </p>
+                <p>
+                  Sunrise:{" "}
+                  {new Date(wreport.sys.sunset * 1000).toLocaleTimeString()}
                 </p>
                 <p>Description: {wreport.weather[0].main}</p>
                 <p>Humidity: {wreport.main.humidity}%</p>
