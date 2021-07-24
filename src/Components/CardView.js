@@ -77,7 +77,7 @@ const CardView = ({ wreport, favourite }) => {
                   )}
                 </p>
                 <p>Description: {wreport.weather[0].main}</p>
-                <p>Humidity: {wreport.main.humidity} %</p>
+                <p>Humidity: {wreport.main.humidity}%</p>
               </div>
               <div style={{ padding: "30px 5px" }}>
                 <img

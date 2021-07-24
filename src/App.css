@@ -8,8 +8,8 @@ body {
   font-family: "Poppins", sans-serif;
 }
 
-.header {
-  min-height:100vh;
+.container {
+  min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -20,7 +20,7 @@ body {
 }
 
 .Rain {
-  min-height:100vh;
+  min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -30,9 +30,8 @@ body {
   background-attachment: fixed;
 }
 
-
-.Cold {
-  min-height:100vh;
+.Snow {
+  min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -43,7 +42,7 @@ body {
 }
 
 .Haze {
-  min-height:100vh;
+  min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -54,7 +53,7 @@ body {
 }
 
 .Sand {
-  min-height:100vh;
+  min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -65,7 +64,7 @@ body {
 }
 
 .Fog {
-  min-height:100vh;
+  min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -75,8 +74,41 @@ body {
   background-attachment: fixed;
 }
 
+.Thunderstorm {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-image: url(./Images/Thunderstorm.jpg);
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+.Drizzle {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-image: url(./Images/Dizzle.webp);
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+.Mist {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-image: url(./Images/Mist.jpg);
+  background-size: cover;
+  background-attachment: fixed;
+}
+
 .Clouds {
-  min-height:100vh;
+  min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -87,7 +119,7 @@ body {
 }
 
 .Clear {
-  min-height:100vh;
+  min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -98,7 +130,7 @@ body {
 }
 
 .Tornado {
-  min-height:100vh;
+  min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -108,7 +140,7 @@ body {
   background-attachment: fixed;
 }
 .Squall {
-  min-height:100vh;
+  min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -118,7 +150,7 @@ body {
   background-attachment: fixed;
 }
 .Ash {
-  min-height:100vh;
+  min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -129,23 +161,12 @@ body {
 }
 
 .Dust {
-  min-height:100vh;
+  min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
   background-image: url(./Images/dust.jpg);
-  background-size: cover;
-  background-attachment: fixed;
-}
-
-.header_hot {
-  min-height:100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  background-image: url(./Images/warm.jpg);
   background-size: cover;
   background-attachment: fixed;
 }
@@ -299,7 +320,7 @@ h4 {
   transition: 0.3s ease-in;
 }
 
-.cityinfo{
+.cityinfo {
   width: 100%;
   height: 100%;
 }
@@ -321,15 +342,38 @@ h3{
   margin: 2px 2px 20px 6px;
 }
 
+h5,h6,h4{
+  margin: 0;
+}
 
 .fav_card img {
   padding: 4px 0 0 4px;
 }
 
-.fav_icon{
+.fav_icon {
   width: 80%;
   padding-bottom: 1vh;
   margin: 1vh auto;
   display: flex;
   justify-content: space-evenly;
+}
+
+.current_location {
+  position: absolute;
+  top: 9%;
+  left: 83%;
+  height: 200px;
+  width: 200px;
+  border-radius: 10px;
+  background-color: rgba(255, 255, 255, 0.555);
+  cursor: pointer;
+}
+
+
+.current_location_data{
+  /* color: white; */
+  position: relative;
+  top: 10%;
+  left: 10%;
+  padding: 5px;
 }

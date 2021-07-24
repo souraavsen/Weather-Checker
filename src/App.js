@@ -2,6 +2,7 @@ import "./App.css";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import heart from "./Images/heart.png";
+import current_location from "./Images/current_location.png";
 import remove from "./Images/delete.png";
 import CardView from "./Components/CardView";
 
@@ -12,6 +13,51 @@ function App() {
   const [data, setData] = useState([]);
   const [storecities, setStorecities] = useState([]);
   const [cities, setCities] = useState([]);
+  const [cldata, setCldata] = useState([]);
+
+  const [location, setLocation] = useState({
+    latitude:"",
+    longitude: ""
+  })
+
+
+  const LocationSuccess = (location) => {
+    setLocation({
+      latitude: location.coords.latitude,
+      longitude: location.coords.longitude
+    });
+
+    console.log("Location",location);
+  }
+
+   useEffect(() => {
+     if (!("geolocation" in navigator)) {
+       console.log("ERROR!!!!!!!");
+     }
+     navigator.geolocation.getCurrentPosition(LocationSuccess);
+   }, []);
+
+
+ useEffect(() => {
+   // if (city.length === 0 && country.length === 0) {
+   //   const weatherReport = await fetch(
+   //     `https://api.openweathermap.org/data/2.5/onecall?lat=${location.latitude}&lon=${location.longitude}&exclude=daily&appid=${Api_key}`
+   //   );
+   //   console.log("weatherReport", weatherReport);
+   //    const response = await weatherReport.json();
+   //    setData(response);
+   // }
+   axios
+     .get(
+       `https://api.openweathermap.org/data/2.5/onecall?lat=${location.latitude}&lon=${location.longitude}&exclude=daily&appid=${Api_key}`
+     )
+     .then((res) => {
+       const response = res.data;
+       setCldata(response.current);
+     });
+ }, [location]);
+  
+  console.log("Data", cldata); 
 
   const submit = async () => {
     const weatherReport = await fetch(
@@ -30,11 +76,11 @@ function App() {
     }
   };
 
-  useEffect(() => {
+  useEffect(async () => {
     localStorage.setItem("queryies", JSON.stringify(cities));
     const data = localStorage.getItem("queryies");
     setStorecities(JSON.parse(data));
-  }, [cities])
+  }, [cities]);
 
   const Checkfavourite = async (ci, con) => {
     const weatherReport = await fetch(
@@ -49,11 +95,13 @@ function App() {
     setCities(item);
   }
 
-  // console.log("Data", data.weather[0].main);
-
   return (
     <div
-      className={data.length === 0 ? "header" : `${data.weather[0].main}`}
+      className={
+        data.cod === "404" || data.length === 0
+          ? "container"
+          : `${data.weather[0].main}`
+      }
       // className={
       //   data.cod === "404" || data.length === 0
       //     ? "header"
@@ -63,6 +111,32 @@ function App() {
       // }
     >
       <h1 style={{ color: "white" }}>Weather Checker</h1>
+
+      {cldata.length === 0 ? (
+        <div className='current_location'>
+          <h4>Error</h4>
+        </div>
+      ) : (
+        <div className='current_location'>
+          <div className='current_location_data'>
+            <h3 style={{ color: "white", fontWeight: "bolder" }}>
+              Your Weather
+            </h3>
+            <h4>Temperature: {Math.round(cldata.temp / 10)}°C</h4>
+            <h5>Humidity: {cldata.humidity}%</h5>
+            <h5>
+              Sunrise:{" "}
+              {new Date(cldata.sunrise * 1000).toLocaleTimeString("en-IN")}
+            </h5>
+            <h5>
+              Sunset:{" "}
+              {new Date(cldata.sunset * 1000).toLocaleTimeString("en-IN")}
+            </h5>
+            <h6>Description: {cldata.weather[0].main}</h6>
+          </div>
+        </div>
+      )}
+
       <div className='form'>
         <input
           type='search'
