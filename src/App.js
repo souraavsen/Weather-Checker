@@ -66,7 +66,7 @@ function App() {
     }
   };
 
-  useEffect(async () => {
+  useEffect(() => {
     if(cities.length!==0){
       localStorage.setItem("queryies", JSON.stringify(cities));
     }
