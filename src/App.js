@@ -15,48 +15,38 @@ function App() {
   const [cldata, setCldata] = useState([]);
 
   const [location, setLocation] = useState({
-    latitude:"",
-    longitude: ""
-  })
-
+    latitude: "",
+    longitude: "",
+  });
 
   const LocationSuccess = (location) => {
     setLocation({
       latitude: location.coords.latitude,
-      longitude: location.coords.longitude
+      longitude: location.coords.longitude,
     });
 
-    console.log("Location",location);
-  }
+    console.log("Location", location);
+  };
 
-   useEffect(() => {
-     if (!("geolocation" in navigator)) {
-       console.log("ERROR!!!!!!!");
-     }
-     navigator.geolocation.getCurrentPosition(LocationSuccess);
-   }, []);
+  useEffect(() => {
+    if (!("geolocation" in navigator)) {
+      console.log("ERROR!!!!!!!");
+    }
+    navigator.geolocation.getCurrentPosition(LocationSuccess);
+  }, []);
 
+  useEffect(() => {
+    axios
+      .get(
+        `https://api.openweathermap.org/data/2.5/onecall?lat=${location.latitude}&lon=${location.longitude}&exclude=daily&appid=${Api_key}`
+      )
+      .then((res) => {
+        const response = res.data;
+        setCldata(response.current);
+      });
+  }, [location]);
 
- useEffect(() => {
-   // if (city.length === 0 && country.length === 0) {
-   //   const weatherReport = await fetch(
-   //     `https://api.openweathermap.org/data/2.5/onecall?lat=${location.latitude}&lon=${location.longitude}&exclude=daily&appid=${Api_key}`
-   //   );
-   //   console.log("weatherReport", weatherReport);
-   //    const response = await weatherReport.json();
-   //    setData(response);
-   // }
-   axios
-     .get(
-       `https://api.openweathermap.org/data/2.5/onecall?lat=${location.latitude}&lon=${location.longitude}&exclude=daily&appid=${Api_key}`
-     )
-     .then((res) => {
-       const response = res.data;
-       setCldata(response.current);
-     });
- }, [location]);
-  
-  console.log("Data", cldata); 
+  console.log("Data", cldata);
 
   const submit = async () => {
     const weatherReport = await fetch(
@@ -90,9 +80,9 @@ function App() {
   };
 
   const removefav = (cty, cntry) => {
-    const item = storecities.filter((item) => item[0] !== cty)
+    const item = storecities.filter((item) => item[0] !== cty);
     setCities(item);
-  }
+  };
 
   return (
     <div
@@ -108,7 +98,7 @@ function App() {
         <div className='current_location'>
           <h3
             className='current_location_data'
-             style={{ color: "white", fontWeight: "bolder" }}
+            style={{ color: "white", fontWeight: "bolder" }}
           >
             Something went Wrong
           </h3>
@@ -163,9 +153,7 @@ function App() {
           Go
         </button>
       </div>
-
       <CardView wreport={data} favourite={favourite} />
-
       <div className='favourite'>
         {storecities.map((query, index) => (
           <div key={index} className='fav_card_holder'>

@@ -249,7 +249,7 @@ h2 {
   text-shadow: 1px 1px rgb(0, 0, 0);
   font-weight: 500;
   font-size: 24px;
-  margin: 10px auto ;
+  margin: 10px auto;
 }
 
 .main {
@@ -336,11 +336,13 @@ h2 {
   border: 1px solid rgb(117, 117, 117);
 }
 
-h3{
+h3 {
   margin: 0 0 10px 0;
 }
 
-h5,h6,h4{
+h5,
+h6,
+h4 {
   margin: 2px auto;
 }
 
@@ -367,8 +369,7 @@ h5,h6,h4{
   cursor: pointer;
 }
 
-
-.current_location_data{
+.current_location_data {
   position: relative;
   top: 10%;
   left: 10%;
