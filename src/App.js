@@ -67,7 +67,10 @@ function App() {
   };
 
   useEffect(async () => {
-    localStorage.setItem("queryies", JSON.stringify(cities));
+    // setCities(...cities)
+    if(cities.length!==0){
+      localStorage.setItem("queryies", JSON.stringify(cities));
+    }
     const data = localStorage.getItem("queryies");
     setStorecities(JSON.parse(data));
   }, [cities]);
