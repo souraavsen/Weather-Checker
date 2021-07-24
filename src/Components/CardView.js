@@ -1,5 +1,6 @@
 import React from "react";
 import heart from "../Images/heart.png";
+import "./Responsive.css";
 
 const CardView = ({ wreport, favourite }) => {
   console.log("From Card", wreport);
@@ -46,14 +47,14 @@ const CardView = ({ wreport, favourite }) => {
           <div className='glass'>
             <div className='card'>
               <div>
-                <h3
+                <h2
                   style={{
                     textAlign: "center",
                     margin: "25%",
                   }}
                 >
-                  Check your internet connection or wrong city/country searched.
-                </h3>
+                  {wreport.message} 
+                </h2>
               </div>
               <div style={{ padding: "30px 5px" }}>
                 <img className='heart' src={heart} height='20px' />

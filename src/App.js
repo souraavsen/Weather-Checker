@@ -1,4 +1,5 @@
 import "./App.css";
+import "./Components/Responsive.css";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import heart from "./Images/heart.png";
