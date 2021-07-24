@@ -25,7 +25,7 @@ body {
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  background-image: url(./Images/cloud.jpg);
+  background-image: url(./Images/rain.jpg);
   background-size: cover;
   background-attachment: fixed;
 }
@@ -339,7 +339,7 @@ h4 {
 }
 
 h3{
-  margin: 2px 2px 20px 6px;
+  margin: 0 2px 10px 6px;
 }
 
 h5,h6,h4{
@@ -371,7 +371,6 @@ h5,h6,h4{
 
 
 .current_location_data{
-  /* color: white; */
   position: relative;
   top: 10%;
   left: 10%;

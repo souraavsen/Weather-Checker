@@ -2,7 +2,6 @@ import "./App.css";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import heart from "./Images/heart.png";
-import current_location from "./Images/current_location.png";
 import remove from "./Images/delete.png";
 import CardView from "./Components/CardView";
 
@@ -114,7 +113,12 @@ function App() {
 
       {cldata.length === 0 ? (
         <div className='current_location'>
-          <h4>Error</h4>
+          <h3
+            className='current_location_data'
+             style={{ color: "white", fontWeight: "bolder" }}
+          >
+            Something went Wrong
+          </h3>
         </div>
       ) : (
         <div className='current_location'>
