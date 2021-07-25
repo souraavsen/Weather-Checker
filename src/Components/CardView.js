@@ -3,7 +3,6 @@ import heart from "../Images/heart.png";
 import "./Responsive.css";
 
 const CardView = ({ wreport, favourite }) => {
-  console.log("From Card", wreport);
   const CurrentDate = (d) => {
     var month = [
       "January",

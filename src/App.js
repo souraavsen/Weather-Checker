@@ -25,14 +25,9 @@ function App() {
       latitude: location.coords.latitude,
       longitude: location.coords.longitude,
     });
-
-    console.log("Location", location);
   };
 
   useEffect(() => {
-    if (!("geolocation" in navigator)) {
-      console.log("ERROR!!!!!!!");
-    }
     navigator.geolocation.getCurrentPosition(LocationSuccess);
   }, []);
 
@@ -46,8 +41,6 @@ function App() {
         setCldata(response.current);
       });
   }, [location]);
-
-  console.log("Data", cldata);
 
   const submit = async () => {
     const weatherReport = await fetch(
@@ -66,8 +59,10 @@ function App() {
     }
   };
 
-  useEffect(() => {
-    if(cities.length!==0){
+  useEffect(async () => {
+    if (localStorage.getItem("queryies").length !== 0 && cities.length === 0) {
+      setCities(JSON.parse(localStorage.getItem("queryies")));
+    } else {
       localStorage.setItem("queryies", JSON.stringify(cities));
     }
     const data = localStorage.getItem("queryies");

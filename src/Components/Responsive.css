@@ -25,9 +25,10 @@
     flex-direction: column;
   }
 
-  .form button{
+  .form button, .btn:hover{
       margin: 2vh auto;
   }
+
 }
 
 
@@ -51,7 +52,7 @@
     flex-direction: column;
   }
 
-  .form button{
+  .form button, .btn:hover{
       margin: 4vh auto;
   }
 
@@ -70,7 +71,7 @@
     left: 0;
   }
 
-  .form button {
+  .form button, .btn:hover {
     margin-top: 5%;
     margin-left: 45%;
   }
