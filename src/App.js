@@ -6,16 +6,24 @@ import heart from "./Images/heart.png";
 import remove from "./Images/delete.png";
 import CardView from "./Components/CardView";
 
+const getData = () => {
+  var localstoragedata = localStorage.getItem("queryies")
+  if (localstoragedata) {
+    return JSON.parse(localstoragedata);
+  }
+  else {
+    return [];
+  }
+}
+
 function App() {
   const Api_key = "8691eb734123a777487351b5d9f298d2";
   const [country, setCountry] = useState("");
   const [city, setCity] = useState("");
   const [data, setData] = useState([]);
   const [storecities, setStorecities] = useState([]);
-  const [cities, setCities] = useState([]);
+  const [cities, setCities] = useState(getData());
   const [cldata, setCldata] = useState([]);
-  const [deletef, setDeletef] = useState(false);
-  const [addf, setAddf] = useState(false);
   const [location, setLocation] = useState({
     latitude: "",
     longitude: "",
@@ -57,21 +65,10 @@ function App() {
       cities.length === 0
     ) {
       setCities([...cities, [data.name, data.sys.country]]);
-      setAddf(true)
     }
   };
-
   useEffect(() => {
-     if (localStorage.getItem("queryies").length>0 && addf === false && deletef === false) {
-       setCities(JSON.parse(localStorage.getItem("queryies")));
-     } else {
-       localStorage.setItem("queryies", JSON.stringify(cities));
-       setDeletef(false);
-       setAddf(false);
-     }
-  }, [addf,deletef])
-
-  useEffect(() => {
+    localStorage.setItem("queryies", JSON.stringify(cities));
     const data = localStorage.getItem("queryies");
     setStorecities(JSON.parse(data));
   }, [cities]);
@@ -87,10 +84,7 @@ function App() {
   const removefav = (cty, cntry) => {
     const item = storecities.filter((item) => item[0] !== cty);
     setCities(item);
-    setDeletef(true)
   };
-
-  console.log(cldata);
 
   return (
     <div

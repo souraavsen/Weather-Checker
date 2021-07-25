@@ -52,11 +52,16 @@ const CardView = ({ wreport, favourite }) => {
                     margin: "25%",
                   }}
                 >
-                  {wreport.message} 
+                  {wreport.message}
                 </h2>
               </div>
               <div style={{ padding: "30px 5px" }}>
-                <img className='heart' src={heart} height='20px' />
+                <img
+                  className='heart'
+                  alt='favourite icon'
+                  src={heart}
+                  height='20px'
+                />
               </div>
             </div>
           </div>
@@ -90,6 +95,7 @@ const CardView = ({ wreport, favourite }) => {
                   }}
                   className='heart'
                   src={heart}
+                  alt=''
                   height='20px'
                 />
               </div>
