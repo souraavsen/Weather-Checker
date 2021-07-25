@@ -76,7 +76,7 @@ const CardView = ({ wreport, favourite }) => {
                   {new Date(wreport.sys.sunrise * 1000).toLocaleTimeString()}
                 </p>
                 <p>
-                  Sunrise:{" "}
+                  Sunset:{" "}
                   {new Date(wreport.sys.sunset * 1000).toLocaleTimeString()}
                 </p>
                 <p>Description: {wreport.weather[0].main}</p>

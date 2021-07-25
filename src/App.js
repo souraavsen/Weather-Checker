@@ -14,7 +14,8 @@ function App() {
   const [storecities, setStorecities] = useState([]);
   const [cities, setCities] = useState([]);
   const [cldata, setCldata] = useState([]);
-
+  const [deletef, setDeletef] = useState(false);
+  const [addf, setAddf] = useState(false);
   const [location, setLocation] = useState({
     latitude: "",
     longitude: "",
@@ -56,15 +57,21 @@ function App() {
       cities.length === 0
     ) {
       setCities([...cities, [data.name, data.sys.country]]);
+      setAddf(true)
     }
   };
 
-  useEffect(async () => {
-    if (localStorage.getItem("queryies").length !== 0 && cities.length === 0) {
-      setCities(JSON.parse(localStorage.getItem("queryies")));
-    } else {
-      localStorage.setItem("queryies", JSON.stringify(cities));
-    }
+  useEffect(() => {
+     if (localStorage.getItem("queryies").length>0 && addf === false && deletef === false) {
+       setCities(JSON.parse(localStorage.getItem("queryies")));
+     } else {
+       localStorage.setItem("queryies", JSON.stringify(cities));
+       setDeletef(false);
+       setAddf(false);
+     }
+  }, [addf,deletef])
+
+  useEffect(() => {
     const data = localStorage.getItem("queryies");
     setStorecities(JSON.parse(data));
   }, [cities]);
@@ -80,7 +87,10 @@ function App() {
   const removefav = (cty, cntry) => {
     const item = storecities.filter((item) => item[0] !== cty);
     setCities(item);
+    setDeletef(true)
   };
+
+  console.log(cldata);
 
   return (
     <div
@@ -108,16 +118,17 @@ function App() {
               Your Weather
             </h3>
             <h4>Temperature: {Math.round(cldata.temp / 10)}°C</h4>
-            <h5>Humidity: {cldata.humidity}%</h5>
             <h5>
               Sunrise:{" "}
-              {new Date(cldata.sunrise * 1000).toLocaleTimeString("en-IN")}
+              {new Date(cldata.sunrise * 1000).toLocaleTimeString()}
             </h5>
             <h5>
               Sunset:{" "}
-              {new Date(cldata.sunset * 1000).toLocaleTimeString("en-IN")}
+              {new Date(cldata.sunset * 1000).toLocaleTimeString()}
             </h5>
             <h5>Description: {cldata.weather[0].main}</h5>
+            <h5>Humidity: {cldata.humidity}%</h5>
+            <h5>Wind Speed: {cldata.wind_speed}</h5>
           </div>
         </div>
       )}
